@@ -1,0 +1,65 @@
+name: intalim
+description: InTalim Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  build_runner: ^2.0.0
+  easy_localization: ^3.0.2
+#  http: ^1.1.0
+#  get: ^4.3.8
+  flutter_svg: ^2.0.7
+  go_router: ^12.1.1
+  bloc: ^8.1.2
+  flutter_bloc: ^8.1.3
+  shared_preferences: ^2.2.2
+  http: ^1.1.0
+  objectbox: ^2.3.1
+  objectbox_flutter_libs: ^2.3.1
+  internet_connection_checker: ^1.0.0+1
+  meta: ^1.9.1
+  qr_code_scanner: ^1.0.1
+  qr_flutter: ^4.1.0
+  freezed_annotation: ^2.4.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/person.png
+    - assets/lang/
+    - assets/bottom_navigation/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat_regular.ttf
+          weight: 400  # FontWeight.w400 is used for bold
+        - asset: assets/fonts/montserrat_bold.ttf
+          weight: 700  # FontWeight.w700 is used for bold
+        - asset: assets/fonts/montserrat_semi_bold.ttf
+          weight: 600  # FontWeight.w600 is used for semi-bold
+        - asset: assets/fonts/montserrat_medium.ttf
+          weight: 500  # FontWeight.w500 is used for medium
+        - asset: assets/fonts/montserrat_extra_bold.ttf
+          weight: 800  # FontWeight.w800 is used for extra-bold
+
