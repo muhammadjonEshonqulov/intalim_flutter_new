@@ -28,7 +28,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.login,
-      builder: (context, state) => const LoginScreen(),
+      builder: (context, state) => const LoginPageWithRepo(),
     ),
     // GoRoute(
     //   path: Routes.home,
