@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:intalim/features/lessons/page/lessons.dart';
 import 'package:intalim/features/main/page/main_screen.dart';
 import 'package:intalim/features/splash/page/splash_screen.dart';
 
@@ -8,11 +9,12 @@ abstract final class Routes {
   static const splash = '/splash';
   static const login = '/login';
   static const home = '/home';
+  static const lessons = '/lessons';
   static const main = '/main';
   static const language = '/language';
   static const drawer = '/drawer';
 
-  static  const baseUrl = "http://back.intalim.uz/api/";
+  static  const baseUrl = "https://back.eavtotalim.uz/v2/api/";
 }
 final router = GoRouter(
   initialLocation: Routes.splash,
@@ -30,10 +32,10 @@ final router = GoRouter(
       path: Routes.login,
       builder: (context, state) => const LoginPageWithRepo(),
     ),
-    // GoRoute(
-    //   path: Routes.home,
-    //   builder: (context, state) => const HomePage(),
-    // ),
+    GoRoute(
+      path: Routes.lessons,
+      builder: (context, state) => const LessonsPageWithRepo(),
+    ),
     GoRoute(
       path: Routes.main,
       builder: (context, state) => const MainScreen(),

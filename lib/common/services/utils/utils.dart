@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Utils {
@@ -10,22 +11,31 @@ class Utils {
   static Color cardDefColor = const Color(0xffF7F9F8);
   static Color backColor = const Color(0xffFBFBFB);
   static Color nightBackColor = const Color(0xffF5F5F5);
-
+// static int statusCode = 0;
 }
+
 void showSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(message)));
 }
 
-void showSnack(GlobalKey<ScaffoldMessengerState>  scaffoldMessengerKey, String title) {
+void showSnack(GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey, String title) {
   final snackbar = SnackBar(
-      content: Text(title, textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 15,
-        ),
-      ));
+      content: Text(
+    title,
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 15,
+    ),
+  ));
   // scaffoldMessengerKey.currentState.hideSnackBar();
   scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
   scaffoldMessengerKey.currentState?.showSnackBar(snackbar);
+}
+
+void kprint(dynamic message) {
+  if (kDebugMode) {
+    print(message);
+  }
 }

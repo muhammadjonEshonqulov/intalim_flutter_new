@@ -6,7 +6,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
-abstract final class Utils {
+ class Utils {
+  static int statusCode = 0;
+
   static DateTime parseTime(String dateString) {
     // Split the string into date and time parts
     List<String> parts = dateString.split(' ');
@@ -68,4 +70,5 @@ abstract final class Utils {
       return null;
     }
   }
+
 }

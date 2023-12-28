@@ -1,0 +1,1 @@
+import 'package:flutter/cupertino.dart';@immutableabstract class SavedLessonsEvent {}class SavedLessonsEventData extends SavedLessonsEvent {}

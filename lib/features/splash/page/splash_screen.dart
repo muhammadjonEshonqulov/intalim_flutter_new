@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intalim/common/services/utils/utils.dart';
+import 'package:intalim/db/cache.dart';
 
 import '../../../app/router.dart';
 
@@ -24,10 +26,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   init() {
     _animatedController = AnimationController(duration: const Duration(seconds: 2), vsync: this)
       ..forward()
-      ..addStatusListener((status) {
+      ..addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
           // Navigator.of(context).pushReplacementNamed(Routes.login);
-          router.go(Routes.login);
+          var token = await cache.getString(cache.token);
+          kprint("token--> $token");
+          await cache.clear();
+          if (token == null) {
+            router.go(Routes.login);
+          } else {
+            router.go(Routes.main);
+          }
         }
       });
     _curvedAnimation = CurvedAnimation(parent: _animatedController, curve: Curves.elasticOut);

@@ -1,65 +1,37 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:intalim/features/login/model/login_response.dart';
+import 'package:intalim/common/repository/network_result.dart';
 
 import '../../../db/cache.dart';
 import '../repository/login_repository.dart';
 
-part 'login_event.dart';
+part '../model/login_event.dart';
 
-part 'login_state.dart';
-
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends Bloc<LoginEvent, NetworkResult> {
   final LoginRepository loginRepository;
 
-  LoginBloc(this.loginRepository) : super(LoginInitial()) {
-    LoginResponse? loginResponse;
-
-    on<LoginEventLogin>((event, emit) async {
-      emit(LoginLoading(loading: true));
+  LoginBloc(this.loginRepository) : super(const Loading()) {
+    on<LoginEventData>((event, emit) async {
+      emit(const Loading());
 
       try {
-        final result = await loginRepository.login(event.username, event.password);
-        loginResponse = result;
+        final loginResult = await loginRepository.login(event.username, event.password);
+        if (loginResult.data?["access_token"] != null) {
+          await cache.setString('token', loginResult.data?["access_token"] ?? "");
+          final meResult = await loginRepository.me(loginResult.data?["access_token"]);
+          await cache.setInt(cache.role, meResult.data?["data"]["user"]["role"]);
+          await cache.setString(cache.user_image_url, meResult.data?["data"]["user"]["image"] ?? "");
+          await cache.setString(cache.fullname, meResult.data?["data"]["profession"]["first_name"] + " " + meResult.data?["data"]["profession"]["last_name"]);
+          await cache.setString(cache.organization_user_uz, meResult.data?["data"]["profession"]["organization"]["name"]);
 
-        if (loginResponse?.accessToken != null) {
-          emit(LoginLoading(loading: false));
+          emit(meResult);
 
-          print("loginResponse->$loginResponse");
-          await cache.setString('token', loginResponse!.accessToken ?? "");
-          // await loginRepository.saveUser(loginResponse!.user!);
-
-          emit(LoginLoading(loading: false));
-          emit(LoginSuccess());
-        } else {
-          emit(LoginLoading(loading: false));
-          emit(LoginFailed());
-        }
+          // emit(Success(data: meResult));
+        } else
+          emit(loginResult);
       } catch (e) {
-        print('LOGIN ERROR: $e');
-        emit(LoginFailed());
-        emit(LoginLoading(loading: false));
+        emit(Error(message: e.toString(), data: null, code: 0));
       }
     });
-  }
-
-  void showErrorDialog(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Хатолик'),
-          content: Text(message),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ёпиш'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }
