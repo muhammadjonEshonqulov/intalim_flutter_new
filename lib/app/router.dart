@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intalim/features/lessons/page/lessons.dart';
 import 'package:intalim/features/main/page/main_screen.dart';
 import 'package:intalim/features/splash/page/splash_screen.dart';
 
 import '../features/login/page/login_screen.dart';
+import '../features/topic/page/topics.dart';
 
 abstract final class Routes {
   static const splash = '/splash';
@@ -11,11 +13,13 @@ abstract final class Routes {
   static const home = '/home';
   static const lessons = '/lessons';
   static const main = '/main';
+  static const topic = '/topic';
   static const language = '/language';
   static const drawer = '/drawer';
 
-  static  const baseUrl = "https://back.eavtotalim.uz/v2/api/";
+  static const baseUrl = "https://back.eavtotalim.uz/v2/api/";
 }
+
 final router = GoRouter(
   initialLocation: Routes.splash,
   // initialExtra: const SurveyStep3PageExtra(
@@ -26,7 +30,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: Routes.splash,
-      builder: (context, state) => const SplashScreen(),
+      builder: (context, state) => const SplashPageWithRepo(),
     ),
     GoRoute(
       path: Routes.login,
@@ -40,5 +44,18 @@ final router = GoRouter(
       path: Routes.main,
       builder: (context, state) => const MainScreen(),
     ),
+    GoRoute(
+      path: Routes.topic,
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final eduTypeLessonId = extra['eduTypeLessonId'] ?? 0;
+        final eduTypeLessonName = extra['eduTypeLessonName'] ?? "";
+        return TopicsPageWithRepo(eduTypeLessonId: eduTypeLessonId, eduTypeLessonName: eduTypeLessonName);
+      },
+    ),
   ],
 );
+
+void finish(BuildContext context) {
+  Navigator.of(context).pop();
+}

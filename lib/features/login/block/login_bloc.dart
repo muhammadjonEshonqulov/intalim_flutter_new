@@ -21,6 +21,8 @@ class LoginBloc extends Bloc<LoginEvent, NetworkResult> {
           final meResult = await loginRepository.me(loginResult.data?["access_token"]);
           await cache.setInt(cache.role, meResult.data?["data"]["user"]["role"]);
           await cache.setString(cache.user_image_url, meResult.data?["data"]["user"]["image"] ?? "");
+          await cache.setString(cache.username, event.username??"");
+          await cache.setString(cache.password, event.password??"");
           await cache.setString(cache.fullname, meResult.data?["data"]["profession"]["first_name"] + " " + meResult.data?["data"]["profession"]["last_name"]);
           await cache.setString(cache.organization_user_uz, meResult.data?["data"]["profession"]["organization"]["name"]);
 
