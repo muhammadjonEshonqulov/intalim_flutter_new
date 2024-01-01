@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intalim/features/lessons/page/lessons.dart';
 import 'package:intalim/features/main/page/main_screen.dart';
+import 'package:intalim/features/profile/page/profile_screen.dart';
 import 'package:intalim/features/splash/page/splash_screen.dart';
 
 import '../features/login/page/login_screen.dart';
@@ -16,6 +17,7 @@ abstract final class Routes {
   static const topic = '/topic';
   static const language = '/language';
   static const drawer = '/drawer';
+  static const profile = '/profile';
 
   static const baseUrl = "https://back.eavtotalim.uz/v2/api/";
 }
@@ -43,6 +45,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.main,
       builder: (context, state) => const MainScreen(),
+    ),
+    GoRoute(
+      path: Routes.profile,
+      builder: (context, state) => const ProfileScreen(),
     ),
     GoRoute(
       path: Routes.topic,

@@ -26,8 +26,6 @@ class LoginRepository {
     final apiHelper = ApiHelper();
     final response = await apiHelper.myGet("auth/me", {});
 
-    kprint(response.statusCode);
-
     try {
       return handleResponse(response);
     } catch (e) {
