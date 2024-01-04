@@ -1,0 +1,1 @@
+abstract class ContentEvent {}class ContentEventData extends ContentEvent {  int topicId;  ContentEventData(this.topicId);}

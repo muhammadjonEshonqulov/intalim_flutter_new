@@ -17,7 +17,8 @@ class MeBloc extends Bloc<MeEvent, NetworkResult> {
         final username = await cache.getString(cache.username) ?? "";
         final password = await cache.getString(cache.password) ?? "";
         final meResult = await loginRepository.me();
-        if (meResult.code == 401) {
+        kprint("meResult->${meResult.message}");
+        if (meResult.code == 401 && username.isNotEmpty && password.isNotEmpty) {
           final loginResult = await loginRepository.login(username, password);
           if (loginResult.data?["access_token"] != null) {
             await cache.setString('token', loginResult.data?["access_token"] ?? "");

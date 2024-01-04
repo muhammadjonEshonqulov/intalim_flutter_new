@@ -5,21 +5,24 @@ import 'package:intalim/features/main/page/main_screen.dart';
 import 'package:intalim/features/profile/page/profile_screen.dart';
 import 'package:intalim/features/splash/page/splash_screen.dart';
 
+import '../features/content/page/contents.dart';
 import '../features/login/page/login_screen.dart';
 import '../features/topic/page/topics.dart';
 
 abstract final class Routes {
-  static const splash = '/splash';
-  static const login = '/login';
-  static const home = '/home';
-  static const lessons = '/lessons';
-  static const main = '/main';
-  static const topic = '/topic';
-  static const language = '/language';
-  static const drawer = '/drawer';
-  static const profile = '/profile';
+  static const splash = '/nav_splash';
+  static const login = '/nav_login';
+  static const home = '/nav_home';
+  static const lessons = '/nav_lessons';
+  static const main = '/nav_main';
+  static const topic = '/nav_topic';
+  static const language = '/nav_language';
+  static const drawer = '/nav_drawer';
+  static const profile = '/nav_profile';
+  static const content = '/nav_content';
 
-  static const baseUrl = "https://back.eavtotalim.uz/v2/api/";
+  static const baseUrl = "$baseUrlImage/v2/api/";
+  static const baseUrlImage = "https://back.eavtotalim.uz";
 }
 
 final router = GoRouter(
@@ -57,6 +60,15 @@ final router = GoRouter(
         final eduTypeLessonId = extra['eduTypeLessonId'] ?? 0;
         final eduTypeLessonName = extra['eduTypeLessonName'] ?? "";
         return TopicsPageWithRepo(eduTypeLessonId: eduTypeLessonId, eduTypeLessonName: eduTypeLessonName);
+      },
+    ),
+    GoRoute(
+      path: Routes.content,
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final topicId = extra['topicId'] ?? 0;
+        final topicName = extra['topicName'] ?? "";
+        return ContentPageWithRepo(topicId: topicId, topicName: topicName);
       },
     ),
   ],

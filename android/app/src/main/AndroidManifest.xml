@@ -4,6 +4,7 @@
         android:label="intalim"
         android:name="${applicationName}"
         tools:overrideLibrary="net.touchcapture.qr.flutterqr"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

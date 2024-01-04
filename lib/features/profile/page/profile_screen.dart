@@ -14,8 +14,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen>  {
-  var fullName = "";
-  var organizationUser = "";
+  String fullName = "";
+  String organizationUser = "";
 
 
   @override
@@ -25,11 +25,12 @@ class _ProfileScreenState extends State<ProfileScreen>  {
   }
 
   void _getProfile() async {
-    organizationUser = await cache.getString(cache.organization_user_uz)??"";
-    fullName = await cache.getString(cache.fullname)??"";
+    String organ = await cache.getString(cache.organization_user_uz)??"";
+    String full = await cache.getString(cache.fullname)??"";
 
-    setState(() async {
-
+    setState(() {
+      fullName = full;
+      organizationUser = organ;
     });
   }
   @override
@@ -379,8 +380,8 @@ class _ProfileScreenState extends State<ProfileScreen>  {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontWeight: FontWeight.w500,
-                            fontSize: 15.0,
-                            color: Colors.blue, // Change color as needed
+                            fontSize: 14.0,
+                            color: Utils.colorPrimary, // Change color as needed
                           ),
                         ),
                       ),
@@ -396,8 +397,9 @@ class _ProfileScreenState extends State<ProfileScreen>  {
                           'cancel'.tr(),
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 15.0,
-                            color: Colors.blue, // Change color as needed
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14.0,
+                            color: Utils.colorPrimary
                           ),
                         ),
                       ),

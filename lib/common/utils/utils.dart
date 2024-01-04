@@ -4,9 +4,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
- class Utils {
+class Utils {
   static int statusCode = 0;
 
   static DateTime parseTime(String dateString) {
@@ -33,8 +35,7 @@ import 'package:intl/intl.dart';
   }
 
   /// yyyy-MM-dd hh:mm:ss
-  static final dateFormatter_yyyy_MM_dd_hh_mm_ss =
-      DateFormat('yyyy-MM-dd hh:mm:ss');
+  static final dateFormatter_yyyy_MM_dd_hh_mm_ss = DateFormat('yyyy-MM-dd hh:mm:ss');
 
   /// yyyy-MM-dd
   static final dateFormatter_yyyy_MM_dd = DateFormat('yyyy-MM-dd');
@@ -58,8 +59,7 @@ import 'package:intl/intl.dart';
     }
   }
 
-  static Future<String?> saveBytesAsBase64Photo(
-      Uint8List imageBytes, String base64Path) async {
+  static Future<String?> saveBytesAsBase64Photo(Uint8List imageBytes, String base64Path) async {
     try {
       final base64Photo = await compute((m) => base64Encode(m), imageBytes);
       final base64File = File(base64Path);
@@ -71,4 +71,25 @@ import 'package:intl/intl.dart';
     }
   }
 
+  static Future<Widget?> loadVideoThumbnail(String videoUrl) async {
+    try {
+      final thumbnailPath = await VideoThumbnail.thumbnailFile(
+        video: videoUrl,
+        imageFormat: ImageFormat.JPEG,
+        quality: 100,
+      );
+
+      if (thumbnailPath != null) {
+        return Image.file(
+          thumbnailPath as File,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+        );
+      }
+    } catch (e) {
+      print('Error loading video thumbnail: $e');
+    }
+
+    return null;
+  }
 }

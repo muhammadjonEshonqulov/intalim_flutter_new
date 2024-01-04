@@ -7,6 +7,7 @@ import 'package:intalim/features/splash/repository/me_repository.dart';
 import 'package:intalim/features/test/repository/tests_repository.dart';
 import 'package:intalim/features/topic/repository/topics_repository.dart';
 
+import '../features/content/repository/content_repository.dart';
 import '../features/lessons/repository/lessons_repository.dart';
 import '../features/login/repository/login_repository.dart';
 import '../features/savedLessons/repository/saved_lessons_repository.dart';
@@ -30,6 +31,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (_) => TestsRepository()),
         RepositoryProvider(create: (_) => MeRepository()),
         RepositoryProvider(create: (_) => TopicsRepository()),
+        RepositoryProvider(create: (_) => ContentRepository()),
         // RepositoryProvider(create: (_) => HomeRepository()),
         // RepositoryProvider(create: (_) => AddHomeRepository()),
         // RepositoryProvider(create: (_) => SurveyStep1Repository()),
@@ -63,6 +65,7 @@ BuildContext? _dialogContext;
 
 void showLoading(context) {
   showDialog(
+    barrierDismissible: true,
     context: context,
     builder: (BuildContext context) {
       _dialogContext = context;

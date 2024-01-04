@@ -5,12 +5,14 @@ import 'package:intalim/app/app.dart';
 
 import 'common/services/language/lang_json.dart';
 import 'db/store.dart';
-
+late ObjectBox objectbox;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  await initObjectbox();
+  // await initObjectbox();
+
+  objectbox = await ObjectBox.create();
 
   runApp(EasyLocalization(
     supportedLocales: const [

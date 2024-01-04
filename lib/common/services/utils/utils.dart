@@ -9,7 +9,7 @@ class Utils {
   static Color defTextColor = const Color(0xff7F7F7F);
   static Color nightDefTextColor = const Color(0x99f5f8fa);
   static Color cardDefColor = const Color(0xffF7F9F8);
-  static Color backColor = const Color(0xffFBFBFB);
+  static Color backColor = const Color(0xFFFBFBFB);
   static Color nightBackColor = const Color(0xffF5F5F5);
 // static int statusCode = 0;
 }

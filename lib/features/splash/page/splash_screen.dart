@@ -41,13 +41,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     super.initState();
   }
 
+
   late AnimationController _animatedController;
   late CurvedAnimation _curvedAnimation;
 
   // var isPinEnabled = false;
 
   init() {
-    _animatedController = AnimationController(duration: const Duration(seconds: 15), vsync: this)
+
+    _animatedController = AnimationController(duration: const Duration(seconds: 6), vsync: this)
       ..forward()
       ..addStatusListener((status) async {
         if (status == AnimationStatus.completed) {
@@ -77,6 +79,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       listener: (context, state) async {
         if (state is Error) {
           snack(context, state.message.toString());
+          kprint(state.message.toString());
         } else if (state is Success) {
           // hideLoading();
           var token = await cache.getString(cache.token);
