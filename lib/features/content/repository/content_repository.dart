@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:intalim/common/repository/network_result.dart';
 
 import '../../../common/utils/api_helper.dart';
+import '../../../main.dart';
+import '../model/content_data.dart';
 
 class ContentRepository {
   Future<NetworkResult<Map<String, dynamic>>> contents(int topicId) async {
@@ -20,5 +22,18 @@ class ContentRepository {
     } catch (e) {
       return catchErrors(e);
     }
+  }
+
+
+  Future<List<ContentData>> getContentData(int topicId) async {
+    return myDao.getContentData(topicId);
+  }
+
+  Future<void> insertContentData(List<ContentData> contents) async {
+    myDao.insertContentData(contents);
+  }
+
+  Future<void> deleteContentData() async {
+    myDao.deleteContentData();
   }
 }

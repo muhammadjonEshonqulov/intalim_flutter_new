@@ -15,14 +15,17 @@ class LessonsBloc extends Bloc<LessonsEvent, NetworkResult> {
     on<LessonsEvent>((event, emit) async {
       emit(const Loading());
       try {
+        final lessonsLocal = await _lessonRepository.getAllLessons();
+
+        if (lessonsLocal.isNotEmpty) {
+          fetchData();
+        }
         final lessonsResult = await lessonsRepository.lessons();
         List<LessonData> lessons = (lessonsResult.data?['data'] as List).map((lessonJson) => LessonData.fromJson(lessonJson)).toList();
         addLessons(lessons);
-        kprint(lessons.length);
-        fetchLessons();
         emit(lessonsResult);
       } catch (e) {
-        fetchLessons();
+        fetchData();
         emit(Error(message: e.toString(), data: null, code: 0));
       }
     });
@@ -33,20 +36,18 @@ class LessonsBloc extends Bloc<LessonsEvent, NetworkResult> {
 
   Stream<List<LessonData>> get lessonsFromLocal => _lessonController.stream;
 
-  void fetchLessons() async {
+  void fetchData() async {
     final lessons = await _lessonRepository.getAllLessons();
-    kprint("fetchLessons-> ${lessons.length}");
     _lessonController.sink.add(lessons);
   }
 
   void addLessons(List<LessonData> lessons) async {
     await _lessonRepository.insertLessons(lessons);
-    fetchLessons();
+    fetchData();
   }
 
-  void addLesson(LessonData lesson) async {
-    await _lessonRepository.insertLesson(lesson);
-    fetchLessons();
+  void deleteLessons() async {
+    await _lessonRepository.deleteLessons();
   }
 
   void dispose() {

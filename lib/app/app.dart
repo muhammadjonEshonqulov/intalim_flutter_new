@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intalim/app/router.dart';
 import 'package:intalim/features/splash/repository/me_repository.dart';
+import 'package:intalim/features/subjectTest/repository/subject_tests_repository.dart';
 import 'package:intalim/features/test/repository/tests_repository.dart';
 import 'package:intalim/features/topic/repository/topics_repository.dart';
 
@@ -32,6 +33,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (_) => MeRepository()),
         RepositoryProvider(create: (_) => TopicsRepository()),
         RepositoryProvider(create: (_) => ContentRepository()),
+        RepositoryProvider(create: (_) => SubjectTestsRepository()),
         // RepositoryProvider(create: (_) => HomeRepository()),
         // RepositoryProvider(create: (_) => AddHomeRepository()),
         // RepositoryProvider(create: (_) => SurveyStep1Repository()),

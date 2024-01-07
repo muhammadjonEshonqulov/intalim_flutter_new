@@ -8,6 +8,8 @@ import 'package:intalim/common/services/utils/utils.dart';
 
 import '../../../app/router.dart';
 import '../../../common/utils/api_helper.dart';
+import '../../../main.dart';
+import '../model/saved_lesson_data.dart';
 
 class SavedLessonsRepository {
 
@@ -24,5 +26,17 @@ class SavedLessonsRepository {
     } catch (e) {
       return catchErrors(e);
     }
+  }
+
+  Future<List<SavedLessonData>> getAllSavedLesson() async {
+    return myDao.getAllSavedLesson();
+  }
+
+  Future<void> insertSavedLessonData(List<SavedLessonData> savedLessons) async {
+    myDao.insertSavedLessonData(savedLessons);
+  }
+
+  Future<void> deleteSavedLessons() async {
+    myDao.deleteSavedLessons();
   }
 }

@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   init() {
 
-    _animatedController = AnimationController(duration: const Duration(seconds: 6), vsync: this)
+    _animatedController = AnimationController(duration: const Duration(seconds: 1), vsync: this)
       ..forward()
       ..addStatusListener((status) async {
         if (status == AnimationStatus.completed) {

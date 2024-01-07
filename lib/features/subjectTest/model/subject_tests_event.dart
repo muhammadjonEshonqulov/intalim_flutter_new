@@ -1,0 +1,1 @@
+import 'package:flutter/cupertino.dart';@immutableabstract class SubjectTestsEvent {}class SubjectTestsEventData extends SubjectTestsEvent {}

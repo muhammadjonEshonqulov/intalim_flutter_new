@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:intalim/common/repository/network_result.dart';
-import 'package:intalim/db/store.dart';
+import 'package:intalim/db/database.dart';
 import 'package:intalim/main.dart';
 
 import '../../../common/utils/api_helper.dart';
-import '../../../objectbox.g.dart';
 import '../model/lesson_data.dart';
 
 class LessonsRepository {
@@ -24,21 +23,15 @@ class LessonsRepository {
     }
   }
 
-  Box<LessonData> get _taskBox => objectbox.store.box<LessonData>();
-
   Future<List<LessonData>> getAllLessons() async {
-    return _taskBox.getAllAsync();
-  }
-
-  Future<void> insertLesson(LessonData lesson) async {
-    _taskBox.putAsync(lesson);
+    return myDao.getAllLesson();
   }
 
   Future<void> insertLessons(List<LessonData> lessons) async {
-    _taskBox.putMany(lessons);
+    myDao.insertLessonData(lessons);
   }
 
-  Future<void> clearLesson() async {
-    _taskBox.removeAllAsync();
+  Future<void> deleteLessons() async {
+    myDao.deleteLessons();
   }
 }

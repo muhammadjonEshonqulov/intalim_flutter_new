@@ -22,7 +22,7 @@ class MeBloc extends Bloc<MeEvent, NetworkResult> {
           final loginResult = await loginRepository.login(username, password);
           if (loginResult.data?["access_token"] != null) {
             await cache.setString('token', loginResult.data?["access_token"] ?? "");
-            await cache.setInt(cache.role, meResult.data?["data"]["user"]["role"]);
+            await cache.setInt(cache.role, meResult.data?["data"]["user"]["role"]??0);
             await cache.setString(cache.user_image_url, meResult.data?["data"]["user"]["image"] ?? "");
             await cache.setString(cache.fullname, meResult.data?["data"]["profession"]["first_name"] + " " + meResult.data?["data"]["profession"]["last_name"]);
             await cache.setString(cache.organization_user_uz, meResult.data?["data"]["profession"]["organization"]["name"]);

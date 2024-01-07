@@ -7,6 +7,7 @@ import 'package:intalim/features/splash/page/splash_screen.dart';
 
 import '../features/content/page/contents.dart';
 import '../features/login/page/login_screen.dart';
+import '../features/subjectTest/page/subject_test_page.dart';
 import '../features/topic/page/topics.dart';
 
 abstract final class Routes {
@@ -20,6 +21,7 @@ abstract final class Routes {
   static const drawer = '/nav_drawer';
   static const profile = '/nav_profile';
   static const content = '/nav_content';
+  static const subjectTest = '/nav_subject_test';
 
   static const baseUrl = "$baseUrlImage/v2/api/";
   static const baseUrlImage = "https://back.eavtotalim.uz";
@@ -52,6 +54,10 @@ final router = GoRouter(
     GoRoute(
       path: Routes.profile,
       builder: (context, state) => const ProfileScreen(),
+    ),
+    GoRoute(
+      path: Routes.subjectTest,
+      builder: (context, state) => const SubjectTestsPageWithRepo(),
     ),
     GoRoute(
       path: Routes.topic,
