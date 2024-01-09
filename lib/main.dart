@@ -11,9 +11,6 @@ late MyDao myDao;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
-  // await initObjectbox();
-
   AppDatabase appDatabase = (await $FloorAppDatabase.databaseBuilder('app_database.db').build());
   myDao = appDatabase.myDao;
 
@@ -29,32 +26,3 @@ void main() async {
     child: const App(),
   ));
 }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//       statusBarColor: Colors.white, // Set your desired color here
-//       statusBarIconBrightness: Brightness.light, // Optionally, set the status bar icon color
-//     ));
-//
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       locale: context.locale,
-//       supportedLocales: context.supportedLocales,
-//       localizationsDelegates: context.localizationDelegates,
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         appBarTheme: AppBarTheme(
-//           iconTheme: IconThemeData(color: Colors.black),
-//           color: Colors.white,
-//         ),
-//       ),
-//       title: 'InTalim',
-//       home: MainNavigator(),
-//     );
-//   }
-// }

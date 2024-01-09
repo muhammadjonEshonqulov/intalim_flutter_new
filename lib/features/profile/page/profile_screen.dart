@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen>  {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(1000.0),
+          preferredSize: Size.fromHeight(100.0),
           child: CustomAppBar(titleName: "profile".tr()),
         ),
         body: SingleChildScrollView(

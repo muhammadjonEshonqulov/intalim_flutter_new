@@ -5,6 +5,7 @@
         android:name="${applicationName}"
         tools:overrideLibrary="net.touchcapture.qr.flutterqr"
         android:allowBackup="false"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

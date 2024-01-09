@@ -4,9 +4,12 @@ import 'package:intalim/features/lessons/page/lessons.dart';
 import 'package:intalim/features/main/page/main_screen.dart';
 import 'package:intalim/features/profile/page/profile_screen.dart';
 import 'package:intalim/features/splash/page/splash_screen.dart';
+import 'package:intalim/features/templateTest/page/template_test_page.dart';
 
 import '../features/content/page/contents.dart';
 import '../features/login/page/login_screen.dart';
+import '../features/savedTest/page/saved_test_page.dart';
+import '../features/startTest/page/start_screen.dart';
 import '../features/subjectTest/page/subject_test_page.dart';
 import '../features/topic/page/topics.dart';
 
@@ -22,6 +25,9 @@ abstract final class Routes {
   static const profile = '/nav_profile';
   static const content = '/nav_content';
   static const subjectTest = '/nav_subject_test';
+  static const templateTest = '/nav_template_test';
+  static const savedTest = '/nav_saved_test';
+  static const startTest = '/nav_start_test';
 
   static const baseUrl = "$baseUrlImage/v2/api/";
   static const baseUrlImage = "https://back.eavtotalim.uz";
@@ -60,6 +66,14 @@ final router = GoRouter(
       builder: (context, state) => const SubjectTestsPageWithRepo(),
     ),
     GoRoute(
+      path: Routes.templateTest,
+      builder: (context, state) => const TemplatesPageWithRepo(),
+    ),
+    GoRoute(
+      path: Routes.savedTest,
+      builder: (context, state) => const SavedTestsPageWithRepo(),
+    ),
+    GoRoute(
       path: Routes.topic,
       builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>;
@@ -75,6 +89,16 @@ final router = GoRouter(
         final topicId = extra['topicId'] ?? 0;
         final topicName = extra['topicName'] ?? "";
         return ContentPageWithRepo(topicId: topicId, topicName: topicName);
+      },
+    ),
+    GoRoute(
+      path: Routes.startTest,
+      builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final testId = extra['testId'] ?? 0;
+        final typeId = extra['typeId'] ?? 0;
+        final testName = extra['testName'] ?? "";
+        return StartTestPageWithRepo(testId: testId, testName: testName, typeId: typeId,);
       },
     ),
   ],

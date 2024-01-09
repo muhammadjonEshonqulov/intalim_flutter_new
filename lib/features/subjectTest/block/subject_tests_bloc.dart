@@ -16,10 +16,11 @@ class SubjectTestsBloc extends Bloc<SubjectTestsEvent, NetworkResult> {
       emit(const Loading());
 
       try {
-        // final subjectTestLocal = await _subjectTestRepository.getSubjectTestData();
-        // if (subjectTestLocal.isNotEmpty) {
-        //   fetchData();
-        // }
+        // deleteData();
+        final subjectTestLocal = await _subjectTestRepository.getSubjectTestData();
+        if (subjectTestLocal.isNotEmpty) {
+          fetchData();
+        }
         final subjectTestResult = await savedLessonsRepository.getStudentSubjectTestSubjects();
         kprint("getStudentSubjectTestSubjects-> ${subjectTestResult.data.toString()}");
 

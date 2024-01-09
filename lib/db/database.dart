@@ -9,7 +9,9 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../features/content/model/content_data.dart';
 import '../features/savedLessons/model/saved_lesson_data.dart';
+import '../features/savedTest/model/saved_test_data.dart';
 import '../features/subjectTest/model/subject_test_data.dart';
+import '../features/templateTest/model/template_test_data.dart';
 import '../features/topic/model/topic_data.dart';
 import 'my_dao.dart';
 
@@ -21,6 +23,8 @@ part 'database.g.dart';
   TopicData,
   ContentData,
   SubjectTestData,
+  TemplateTestData,
+  SavedTestData,
 ])
 abstract class AppDatabase extends FloorDatabase {
   MyDao get myDao;
